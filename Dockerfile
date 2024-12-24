@@ -11,4 +11,4 @@ COPY target/gestion-station-ski-1.0.jar /app/gestion-station-ski.jar
 ENTRYPOINT ["java", "-jar", "/app/gestion-station-ski.jar"]
 
 # Expose the port the app runs on
-EXPOSE 8080
+EXPOSE 8084
