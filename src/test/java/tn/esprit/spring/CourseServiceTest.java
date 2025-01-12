@@ -9,8 +9,6 @@ import tn.esprit.spring.entities.Course;
 import tn.esprit.spring.repositories.ICourseRepository;
 import tn.esprit.spring.services.CourseServicesImpl;
 
-import java.util.List;
-
 import static org.mockito.Mockito.*;
 import static org.junit.Assert.*;
 
@@ -24,7 +22,7 @@ public class CourseServiceTest {
     private CourseServicesImpl courseService;
 
     @Test
-    void testAddCourse() {
+    public void testAddCourse() {  // Make the test method public
         // Arrange: mock the repository behavior
         Course course = new Course();
         course.setName("Math");
