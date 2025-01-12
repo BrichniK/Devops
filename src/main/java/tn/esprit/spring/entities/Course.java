@@ -16,22 +16,25 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@FieldDefaults(level=AccessLevel.PRIVATE)
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 public class Course implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Long numCourse;
 
 	@Enumerated(EnumType.STRING)
 	TypeCourse typeCourse;
+
 	@Enumerated(EnumType.STRING)
 	Support support;
+
 	@Min(0)
 	@Max(100)
 	int level;
@@ -43,16 +46,24 @@ public class Course implements Serializable {
 	int timeSlot;
 
 	@JsonIgnore
-	@OneToMany(mappedBy= "course")
+	@OneToMany(mappedBy = "course")
 	Set<Registration> registrations;
 
-	public Course(String math, String basic, String online, float v, int i) {
+	// Add a name field to store the course name
+	private String name;  // Add this line
+
+	// Constructor with name field
+	public Course(String name, String basic, String online, float price, int timeSlot) {
+		this.name = name;  // Initialize the name property
+		// Other initializations can go here
 	}
 
+	// Getters and setters for the 'name' property
 	public String getName() {
-		return "";
+		return name;
 	}
 
-    public void setName(String math) {
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 }
