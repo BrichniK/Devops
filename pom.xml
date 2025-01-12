@@ -16,6 +16,8 @@
     <properties>
         <java.version>1.8</java.version>
         <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
+        <!-- JaCoCo and SonarQube configuration -->
+        <sonar.jacoco.reportPaths>target/jacoco-test-report.xml</sonar.jacoco.reportPaths>
     </properties>
     <dependencies>
         <!-- Spring Boot Dependencies -->
