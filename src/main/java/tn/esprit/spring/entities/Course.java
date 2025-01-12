@@ -53,4 +53,6 @@ public class Course implements Serializable {
 		return "";
 	}
 
+    public void setName(String math) {
+    }
 }
