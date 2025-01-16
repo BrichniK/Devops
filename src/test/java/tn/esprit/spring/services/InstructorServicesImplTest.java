@@ -2,9 +2,11 @@ package tn.esprit.spring.services;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 import tn.esprit.spring.entities.Course;
 import tn.esprit.spring.entities.Instructor;
 import tn.esprit.spring.entities.Support;
@@ -21,7 +23,7 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
-
+@ExtendWith(MockitoExtension.class)
 class InstructorServicesImplTest {
 
     @Mock
