@@ -56,7 +56,6 @@
 		<dependency><!-- la partie de mokito -->
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-core</artifactId>
-			<version>4.0.0</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
