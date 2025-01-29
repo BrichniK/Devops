@@ -1,4 +1,4 @@
-version: '3.8'  # Specify the Docker Compose version
+version: '3.8'
 
 services:
   mysql1:
@@ -13,10 +13,6 @@ services:
       - mysql-data:/var/lib/mysql
     networks:
       - spring-network
-    healthcheck:
-      test: ["CMD-SHELL", "mysqladmin ping -h localhost -u root --password=rootpassword || exit 1"]
-      interval: 10s
-      retries: 5
 
   spring-app:
     image: nizarmlaouihi/gestion-station-ski:tagname
