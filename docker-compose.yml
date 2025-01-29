@@ -1,3 +1,5 @@
+version: '3.8'  # Specify the Docker Compose version
+
 services:
   mysql1:
     image: mysql:latest
@@ -36,4 +38,3 @@ volumes:
 networks:
   spring-network:
     driver: bridge
-
