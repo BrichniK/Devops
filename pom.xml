@@ -68,8 +68,7 @@
 		<repository>
 			<id>deploymentRepo</id>
 			<name>Nexus Repository</name>
-			<!--suppress UnresolvedMavenProperty -->
-			<url>${NEXUS_URL}</url>
+			<url>http://localhost:8081/repository/station-skies/</url>
 		</repository>
 	</distributionManagement>
 
