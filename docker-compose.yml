@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  mysql1:
+    image: mysql:latest
+    container_name: mysql1
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: springdb
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - spring-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-prootpassword"]
+      interval: 10s
+      retries: 5
+      timeout: 5s
+
+  spring-app:
+    image: jihene1234/gestion-station-ski:latest
+    container_name: spring-app
+    ports:
+      - "8089:8089"
+    depends_on:
+      mysql1:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql1:3306/springdb?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: rootpassword
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.MySQL8Dialect
+    networks:
+      - spring-network
+
+volumes:
+  mysql-data:
+
+networks:
+  spring-network:
+    external:
+      name: devops_spring-network
+
+
