@@ -1,0 +1,25 @@
+version: '3.3'
+
+services:
+  mysql1:
+    image: mysql:latest
+    container_name: mysql1
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: springdb
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - spring-network
+
+  spring-app:
+    image: nizarmlaouihi/gestion-station-ski:tagname
+    container_name: spring-app
+    ports:
+      - "8089:8089"
+    depends_on:
+      - mysql1
+    environment:
+      SPRING_DATASOURCE_URL: jdb
