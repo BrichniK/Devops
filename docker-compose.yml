@@ -15,6 +15,7 @@ services:
       test: ["CMD-SHELL", "mysqladmin ping -h localhost -u root --password=rootpassword || exit 1"]
       interval: 10s
       retries: 5
+      start_period: 10s
 
   spring-app:
     image: elhem/gestion-station-ski:tagname
