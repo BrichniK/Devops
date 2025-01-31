@@ -1,39 +1,36 @@
 services:
+  java-app:
+    build:
+      context: .  # Utilisation du Dockerfile dans le dossier courant
+    ports:
+      - "8089:8089"  # Correspondance entre l'intérieur et l'extérieur
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql1:3306/springdb?createDatabaseIfNotExist=true
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=rootpassword
+    depends_on:
+      - mysql1
+    restart: always
+    networks:
+      - mynetwork
+
   mysql1:
-    image: mysql:latest
+    image: mysql:latest  # Spécifier une version stable
     container_name: mysql1
     ports:
-      - "3306:3306"
+      - "3307:3306"  # Port externe 3307, interne 3306
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
       MYSQL_DATABASE: springdb
     volumes:
       - mysql-data:/var/lib/mysql
+    restart: always
     networks:
-      - spring-network
-    healthcheck:
-      test: ["CMD-SHELL", "mysqladmin ping -h localhost -u root --password=rootpassword || exit 1"]
-      interval: 10s
-      retries: 5
-      start_period: 10s
-
-  spring-app:
-    image: elhem/gestion-station-ski:tagname
-    container_name: spring-app
-    ports:
-      - "8089:8089"
-    depends_on:
-      - mysql1
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql1:3306/springdb?createDatabaseIfNotExist=true
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: rootpassword
-    networks:
-      - spring-network
+      - mynetwork
 
 volumes:
-  mysql-data:
+  mysql-data:  # Volume persistant pour MySQL
 
 networks:
-  spring-network:
+  mynetwork:  # Réseau commun entre les services
     driver: bridge
