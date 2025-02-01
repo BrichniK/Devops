@@ -36,6 +36,7 @@ class RegistrationServicesImplTest {
         MockitoAnnotations.openMocks(this);
     }
 
+
     @Test
     void addRegistrationAndAssignToSkier() {
         // Arrange
