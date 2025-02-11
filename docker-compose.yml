@@ -1,0 +1,37 @@
+version: '3.3'
+
+services:
+  mysql1:
+    image: mysql:latest
+    container_name: mysql1
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: springdb
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - spring-network
+
+spring-app:
+  image: dockercomposeimg:latest
+  container_name: spring-app
+  ports:
+    - "8089:8089"  # Host port 8089 maps to container port 8089
+  depends_on:
+    - mysql1
+  environment:
+    SPRING_DATASOURCE_URL: jdbc:mysql://mysql1:3306/springdb?createDatabaseIfNotExist=true
+    SPRING_DATASOURCE_USERNAME: root
+    SPRING_DATASOURCE_PASSWORD: rootpassword
+  networks:
+    - spring-network
+
+
+volumes:
+  mysql-data:
+
+networks:
+  spring-network:
+    driver: bridge
